@@ -3,17 +3,14 @@ http basic auth middleware for Gotham framework
 
 ## Usage
 
-```rust
-use gotham::pipeline::new_pipeline;
-use gotham::pipeline::single::single_pipeline;
-use gotham_cors_middleware::CORSMiddleware;
-use gotham::router::builder::*;
-use gotham::router::Router;
+example code is in `examples/basic-auth`, to run example, under repo root dir, just run
 
-fn router() -> Router {
-    let (chain, pipeline) = single_pipeline
-}
+```bash
+cargo run --example basic-auth
 ```
+
+and then open `http://localhost:8000` on your browser, fill "admin" as username and password in
+login modal, then you will see index page.
 
 ## todo
 
@@ -21,3 +18,5 @@ fn router() -> Router {
 - [ ] More elegant error handle and log output
 - [ ] Add doc
 - [ ] Add unit test
+- [ ] Extend protocol to enable logout and login control
+- [ ] publish to crates.io

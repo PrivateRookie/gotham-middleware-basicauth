@@ -6,7 +6,7 @@ use gotham::state::State;
 use gotham_middleware_basicauth::AuthMiddleWare;
 
 fn router() -> Router {
-    // allow user admin login with passwod "admin"
+    // allow user admin login with password "admin"
     let userlist = vec!["admin:admin".to_owned()];
     let (chain, pipeline) = single_pipeline(
         new_pipeline().add(AuthMiddleWare::new(userlist)).build(),
@@ -23,5 +23,6 @@ fn say_hello(state: State) -> (State, &'static str) {
 
 fn main() {
     let addr = "0.0.0.0:8000";
+    println!("gotham is running on 0.0.0.0:8000, login with admin/admin");
     gotham::start(addr, router());
 }
