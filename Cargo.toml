@@ -15,4 +15,4 @@ mime = "0.3.13"
 
 [[example]]
 name = "basic-auth"
-path = "examples/basic-auth"
+path = "examples/basic-auth/src/main.rs"
