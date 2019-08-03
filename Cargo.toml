@@ -5,6 +5,8 @@ authors = ["PrivateRookie <996514515@qq.com>"]
 edition = "2018"
 description = "http basic auth middleware for gotham framework"
 readme = "./README.md"
+homepage = "https://github.com/PrivateRookie/gotham-middleware-basicauth"
+repository = "https://github.com/PrivateRookie/gotham-middleware-basicauth"
 keywords = ["web", "http", "gotham", "middleware"]
 license-file = "./LICENSE"
 
