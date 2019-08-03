@@ -20,7 +20,7 @@ login modal, then you will see index page.
 
 - [ ] Add scoped protecd path
 - [ ] More elegant error handle and log output
-- [ ] Add doc
-- [ ] Add unit test
+- [x] Add doc
+- [x] Add unit test
 - [ ] Extend protocol to enable logout and login control
 - [ ] publish to crates.io
