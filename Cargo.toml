@@ -3,6 +3,10 @@ name = "gotham-middleware-basicauth"
 version = "0.1.0"
 authors = ["PrivateRookie <996514515@qq.com>"]
 edition = "2018"
+description = "http basic auth middleware for gotham framework"
+readme = "./README.md"
+keywords = ["web", "http", "gotham", "middleware"]
+license-file = "./LICENSE"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
