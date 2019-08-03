@@ -3,6 +3,7 @@ http basic auth middleware for Gotham framework
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![996.ICU](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+[![Build Status](https://travis-ci.com/PrivateRookie/gotham-middleware-basicauth.svg?branch=master)](https://travis-ci.com/PrivateRookie/gotham-middleware-basicauth)
 [![](https://tokei.rs/b1/github/PrivateRookie/gotham-middleware-basicauth)](https://tokei.rs/b1/github/PrivateRookie/gotham-middleware-basicauth)
 
 ## Usage
@@ -18,9 +19,10 @@ login modal, then you will see index page.
 
 ## todo
 
-- [ ] Add scoped protecd path
+- [x] ~~Add scoped protecd path~~
 - [ ] More elegant error handle and log output
-- [x] Add doc
-- [x] Add unit test
+- [x] ~~Add doc~~
+- [x] ~~Add unit test~~
 - [ ] Extend protocol to enable logout and login control
-- [ ] publish to crates.io
+- [x] ~~publish to crates.io~~
+- [ ] doc for basic use and scope path feature

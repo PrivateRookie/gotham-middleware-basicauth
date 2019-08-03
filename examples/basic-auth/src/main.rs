@@ -6,14 +6,14 @@ use gotham::state::State;
 use gotham_middleware_basicauth::AuthMiddleWare;
 
 fn router() -> Router {
-    // allow user admin login with password "admin"
-    let userlist = vec!["admin:admin".to_owned()];
+    // default allow user admin login with password "admin"
     let (chain, pipeline) = single_pipeline(
-        new_pipeline().add(AuthMiddleWare::new(userlist)).build(),
+        new_pipeline().add(AuthMiddleWare::default()).build(),
     );
 
     build_router(chain, pipeline, |route| {
         route.get("/").to(say_hello);
+        route.get("/abc").to(say_hello);
     })
 }
 
