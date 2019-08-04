@@ -3,11 +3,11 @@ use gotham::pipeline::single::single_pipeline;
 use gotham::router::builder::*;
 use gotham::router::Router;
 use gotham::test::TestServer;
-use gotham_middleware_basicauth::AuthMiddleWare;
+use gotham_middleware_basicauth::AuthMiddleware;
 use hyper::StatusCode;
 
 fn auth_hello() -> Router {
-    let (chain, pipeline) = single_pipeline(new_pipeline().add(AuthMiddleWare::default()).build());
+    let (chain, pipeline) = single_pipeline(new_pipeline().add(AuthMiddleware::default()).build());
     build_router(chain, pipeline, |route| {
         route
             .get("/")

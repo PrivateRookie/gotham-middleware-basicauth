@@ -3,12 +3,13 @@ use gotham::pipeline::single::single_pipeline;
 use gotham::router::builder::*;
 use gotham::router::Router;
 use gotham::state::State;
-use gotham_middleware_basicauth::AuthMiddleWare;
+use gotham_middleware_basicauth::AuthMiddleware;
 
 fn router() -> Router {
     // default allow user admin login with password "admin"
+    // and protect all paths
     let (chain, pipeline) = single_pipeline(
-        new_pipeline().add(AuthMiddleWare::default()).build(),
+        new_pipeline().add(AuthMiddleware::default()).build(),
     );
 
     build_router(chain, pipeline, |route| {

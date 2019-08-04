@@ -18,7 +18,12 @@ futures = "0.1.28"
 gotham = "0.4"
 hyper = "0.12.33"
 mime = "0.3.13"
+log = "0.4.8"
 
 [[example]]
 name = "basic-auth"
 path = "examples/basic-auth/src/main.rs"
+
+[[example]]
+name = "scoped-auth"
+path = "examples/scoped-auth/src/main.rs"

@@ -2,11 +2,11 @@ use gotham::pipeline::new_pipeline;
 use gotham::pipeline::single::single_pipeline;
 use gotham::router::builder::*;
 use gotham::test::TestServer;
-use gotham_middleware_basicauth::AuthMiddleWare;
+use gotham_middleware_basicauth::AuthMiddleware;
 use hyper::StatusCode;
 
 fn scoped_server() -> TestServer {
-    let middleware: AuthMiddleWare = AuthMiddleWare {
+    let middleware: AuthMiddleware = AuthMiddleware {
         userlist: vec!["admin:admin".to_owned()],
         scopes: vec!["/scoped".to_owned()],
     };
