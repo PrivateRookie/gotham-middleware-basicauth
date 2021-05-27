@@ -3,7 +3,7 @@ use gotham::pipeline::single::single_pipeline;
 use gotham::router::builder::*;
 use gotham::test::TestServer;
 use gotham_middleware_basicauth::AuthMiddleware;
-use hyper::StatusCode;
+use gotham::hyper::StatusCode;
 
 fn scoped_server() -> TestServer {
     let middleware: AuthMiddleware = AuthMiddleware {
