@@ -1,13 +1,14 @@
 use gotham::handler::HandlerFuture;
 use gotham::helpers::http::response::create_response;
-use gotham::middleware::{Middleware, NewMiddleware};
+use gotham::middleware::Middleware;
+use gotham_derive::NewMiddleware;
 use gotham::state::{FromState, State};
-use hyper::header::HeaderMap;
-use hyper::{StatusCode, Uri};
+use gotham::hyper::header::HeaderMap;
+use gotham::hyper::{StatusCode, Uri};
 use log::warn;
-use std::io;
+use std::pin::Pin;
 
-#[derive(Clone)]
+#[derive(NewMiddleware,Clone)]
 pub struct AuthMiddleware {
     pub userlist: Vec<String>,
     pub scopes: Vec<String>,
@@ -40,9 +41,9 @@ impl AuthMiddleware {
             .any(|scope| path.starts_with(&scope[..]))
     }
 
-    fn handle_auth<Chain>(&self, state: State, chain: Chain) -> Box<HandlerFuture>
+    fn handle_auth<Chain>(&self, state: State, chain: Chain) -> Pin<Box<HandlerFuture>>
     where
-        Chain: FnOnce(State) -> Box<HandlerFuture>,
+        Chain: FnOnce(State) -> Pin<Box<HandlerFuture>>,
     {
         let header = HeaderMap::borrow_from(&state);
         match header.get("Authorization") {
@@ -70,18 +71,10 @@ impl AuthMiddleware {
     }
 }
 
-impl NewMiddleware for AuthMiddleware {
-    type Instance = AuthMiddleware;
-
-    fn new_middleware(&self) -> io::Result<Self::Instance> {
-        Ok(self.clone())
-    }
-}
-
 impl Middleware for AuthMiddleware {
-    fn call<Chain>(self, state: State, chain: Chain) -> Box<HandlerFuture>
+    fn call<Chain>(self, state: State, chain: Chain) -> Pin<Box<HandlerFuture>>
     where
-        Chain: FnOnce(State) -> Box<HandlerFuture>,
+        Chain: FnOnce(State) -> Pin<Box<HandlerFuture>>,
     {
         match self.inside_scopes(&state) {
             true => self.handle_auth(state, chain),
@@ -90,7 +83,7 @@ impl Middleware for AuthMiddleware {
     }
 }
 
-fn auth_error(state: State, body: String) -> Box<HandlerFuture> {
+fn auth_error(state: State, body: String) -> Pin<Box<HandlerFuture>> {
     let mut resp = create_response(&state, StatusCode::UNAUTHORIZED, mime::TEXT_PLAIN, body);
     let headers = resp.headers_mut();
     let path = Uri::borrow_from(&state).path();
@@ -98,5 +91,5 @@ fn auth_error(state: State, body: String) -> Box<HandlerFuture> {
         "WWW-Authenticate",
         format!("Basic realm={}", path).parse().unwrap(),
     );
-    Box::new(futures::future::ok((state, resp)))
+    Box::pin(futures::future::ok((state, resp)))
 }
